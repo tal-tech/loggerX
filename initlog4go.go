@@ -24,6 +24,7 @@ type xmlFilter struct {
 	Property []xmlProperty `xml:"property"`
 }
 
+//xml config
 type xmlLoggerConfig struct {
 	Filter []xmlFilter `xml:"filter"`
 }
@@ -69,14 +70,19 @@ func InitLogWithConfig(config *log4go.LogConfig) {
 		os.Exit(1)
 	}
 	checkLogConfig(config)
+	//log4go init
 	log4go.LoadLogConfig(config)
 	logutils.Inited = true
 }
 
+//logger close
 func Close() {
 	log4go.Close()
 }
+
+//check log config and init the log path when use ini config file
 func checkLogConfig(config *log4go.LogConfig) {
+	//level init
 	if _, ok := logutils.LevelMap[config.Level]; ok {
 		if logutils.LevelMap[config.Level] < logutils.SortLevel {
 			logutils.SortLevel = logutils.LevelMap[config.Level]
@@ -85,6 +91,7 @@ func checkLogConfig(config *log4go.LogConfig) {
 	}
 	paths := strings.Split(config.LogPath, "/")
 	if len(paths) > 1 {
+		//create path
 		dir := strings.Join(paths[0:len(paths)-1], "/")
 		err := os.MkdirAll(dir, 0755)
 		if err != nil {
@@ -97,6 +104,7 @@ func checkLogConfig(config *log4go.LogConfig) {
 	}
 }
 
+//check log config and init the log path when use xml config file
 func checkLogPath(filename string) {
 	fd, err := os.Open(filename)
 	if err != nil {
@@ -104,6 +112,7 @@ func checkLogPath(filename string) {
 		os.Exit(1)
 	}
 
+	//read xml file
 	contents, err := ioutil.ReadAll(fd)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "LoadConfiguration: Error: Could not read %q: %s\n", filename, err)
@@ -116,6 +125,7 @@ func checkLogPath(filename string) {
 		os.Exit(1)
 	}
 	//stdout kworker trace--new
+	//parse xml file
 	for _, xmlfilt := range xc.Filter {
 		if xmlfilt.Enabled == "true" {
 			//获取 log.xml中的level
@@ -127,6 +137,7 @@ func checkLogPath(filename string) {
 				}
 			}
 			if xmlfilt.Tag != "stdout" {
+				//init the file
 				for _, prop := range xmlfilt.Property {
 					if prop.Name == "filename" {
 						paths := strings.Split(prop.Value, "/")

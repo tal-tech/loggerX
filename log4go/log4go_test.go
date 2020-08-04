@@ -94,7 +94,7 @@ var logRecordWriteTests = []struct {
 }
 
 func TestConsoleLogWriter(t *testing.T) {
-	console := make(ConsoleLogWriter)
+	console := new(ConsoleLogWriter)
 
 	r, w := io.Pipe()
 	go console.run(w)

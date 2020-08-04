@@ -9,6 +9,7 @@ import (
 	"go.uber.org/zap"
 )
 
+//zap builder
 type zapBuilder struct {
 	zapI *zap.Logger
 }
@@ -17,6 +18,7 @@ func NewZapBuilder(logger *zap.Logger) *zapBuilder {
 	return &zapBuilder{zapI: logger}
 }
 
+//Builder interface LoggerX function implemented
 func (this *zapBuilder) LoggerX(ctx context.Context, lvl string, tag string, args interface{}, v ...interface{}) {
 
 	if tag == "" {
@@ -43,6 +45,7 @@ func (this *zapBuilder) LoggerX(ctx context.Context, lvl string, tag string, arg
 	}
 }
 
+//Builder interface Build function implemented
 func (this *zapBuilder) Build(ctx context.Context, args interface{}, v ...interface{}) (position string, message string) {
 
 	switch t := args.(type) {

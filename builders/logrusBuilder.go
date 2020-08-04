@@ -9,6 +9,7 @@ import (
 	"github.com/tal-tech/loggerX/stackerr"
 )
 
+//logrus builder
 type logrusBuilder struct {
 	LogrusI *logrus.Logger
 }
@@ -17,6 +18,8 @@ func NewLogrusBuilder(logger *logrus.Logger) *logrusBuilder {
 	return &logrusBuilder{LogrusI: logger}
 }
 
+//logrus logger
+//Builder interface LoggerX implemented
 func (this *logrusBuilder) LoggerX(ctx context.Context, lvl string, tag string, args interface{}, v ...interface{}) {
 
 	if tag == "" {
@@ -45,6 +48,7 @@ func (this *logrusBuilder) LoggerX(ctx context.Context, lvl string, tag string, 
 	}
 }
 
+//Builder interface Builder function implemented
 func (this *logrusBuilder) Build(ctx context.Context, args interface{}, v ...interface{}) (position string, message string) {
 
 	switch t := args.(type) {

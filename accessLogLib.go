@@ -9,8 +9,11 @@ import (
 	"go.uber.org/zap"
 )
 
+//global map
+//used to register the other log lib
 var accessLogMap = make(map[string]func(args interface{}), 0)
 
+//support logrus and zap
 func init() {
 	accessLogMap["logrus"] = loadLogrus
 	accessLogMap["zap"] = loadZap
@@ -31,22 +34,26 @@ func AccessLogLib(libName string, args interface{}) {
 	}
 }
 
+//load logrus
 func loadLogrus(args interface{}) {
 	instance, ok := args.(*logrus.Logger)
 	if !ok {
 		fmt.Fprintf(os.Stderr, "SetLogLib Error: Could not get logrus instance!")
 		os.Exit(1)
 	}
+	//logrus builder
 	libBuild := builders.NewLogrusBuilder(instance)
 	SetBuilder(libBuild)
 }
 
+//load zap
 func loadZap(args interface{}) {
 	instance, ok := args.(*zap.Logger)
 	if !ok {
 		fmt.Fprintf(os.Stderr, "SetLogLib Error: Could not get zap instance!")
 		os.Exit(1)
 	}
+	//zap builder
 	libBuild := builders.NewZapBuilder(instance)
 	SetBuilder(libBuild)
 }

@@ -17,11 +17,13 @@ import (
 	"github.com/tal-tech/loggerX/stackerr"
 )
 
+//trace builder
 type TraceBuilder struct {
 	department string
 	version    string
 }
 
+//Builder interface LoggerX function implemented
 func (this *TraceBuilder) LoggerX(ctx context.Context, lvl string, tag string, args interface{}, v ...interface{}) {
 	if !logutils.ValidLevel(lvl) {
 		return
@@ -77,6 +79,7 @@ func (this *TraceBuilder) LoggerX(ctx context.Context, lvl string, tag string, a
 
 }
 
+//Builder interface Build function implemented
 func (this *TraceBuilder) Build(ctx context.Context, args interface{}, v ...interface{}) (position string, message string) {
 	id := ctx.Value("logid")
 	logid := cast.ToString(id)
