@@ -29,7 +29,7 @@ func init() {
 */
 
 func AccessLogLib(libName string, args interface{}) {
-	if ok, fn := accessLogMap[libName]; ok {
+	if fn, ok := accessLogMap[libName]; ok {
 		fn(args)
 	}
 }
