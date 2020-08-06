@@ -3,7 +3,7 @@ package logutils
 import (
 	"strings"
 
-	"github.com/tal-tech/xtools/log4go"
+	"github.com/tal-tech/xtools/loggerX/log4go"
 )
 
 var DefaultReplacer *strings.Replacer
