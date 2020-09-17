@@ -1,4 +1,6 @@
-## xesLogger 日志组件库
+## loggerX 日志组件库
+
+[[开发文档]](https://www.yuque.com/tal-tech/loggerx)
 
 ​	日志作为整个代码行为的记录，是程序执行逻辑和异常最直接的反馈 ，xesLogger日志组件，插件化支持，支持标准输出和高性能磁盘写入,多样化的配置方式，使用起来简单方便，7个日志级别满足项目中各种需求。
 
@@ -167,3 +169,5 @@ error_test.go
     FileLogTraceWriter("/xxx/xxx.log"): Rotate: rename /xxx/xxx.log.1: no such file or dircotry\n
  ```
 * logger库初始化的时候会先进行一次关闭操作，如果在init方法中使用的logger日志打印，数据写入channel，main函数初始化时进行关闭channel操作时会造成panic。
+
+
