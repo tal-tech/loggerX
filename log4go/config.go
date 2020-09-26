@@ -54,25 +54,25 @@ type LogConfig struct {
 func (log *LogConfig) SetConfigMap(conf map[string]string) {
 	for k, v := range conf {
 		switch k {
-		case "LogPath":
+		case "logPath":
 			log.LogPath = v
-		case "Level":
+		case "level":
 			log.Level = v
-		case "Tag":
+		case "tag":
 			log.Tag = v
-		case "Format":
+		case "format":
 			log.Format = v
-		case "RotateLines":
+		case "rotateLines":
 			log.RotateLines = v
-		case "RotateSize":
+		case "rotateSize":
 			log.RotateSize = v
-		case "RotateHourly":
+		case "rotateHourly":
 			log.RotateHourly = (v == "true")
-		case "Rotate":
+		case "rotate":
 			log.Rotate = (v != "false")
-		case "Retention":
+		case "retention":
 			log.Retention = v
-		case "Console":
+		case "console":
 			log.Console = (v == "true")
 		}
 	}
